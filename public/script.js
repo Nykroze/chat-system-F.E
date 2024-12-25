@@ -3,13 +3,20 @@ const messageForm= document.getElementById('message-form');
 const messageInput=document.getElementById('message-input');
 const messageList= document.getElementById('message');
 
-
+ 
 socket.on('connect', ()=>{
     console.log('Connecté au serveur via Socket.IO');
 
-    // Exemple d'envoi de message
-    socket.emit('message', 'Hello depuis le frontend !');
+
+
+  // Exemple d'envoi de message
+  //  socket.emit('message', 'Hello depuis le frontend !');
+
+
 });
+
+
+
 
 // Écoute des messages du serveur
 socket.on('message', (msg) => {
@@ -30,13 +37,24 @@ messageForm.addEventListener('submit',(e)=>{
 
 // recption du message depuis le back-end
 
-socket.on('message',(msg)=>{
+socket.on('message',(data)=>{
    
     const li= document.createElement('li');
-    li.textContent=msg;
+    // ici je vais comparer celui qui envoie le message et celui qui le reçois
+    if(data.id===socket.id){
+        li.textContent=`moi: ${data.text}`;
+        li.className='';  
+    }
+    else{
+        li.textContent=`autre: ${data.text}`;
+        li.className='';  
+    }
+
     messageList.appendChild(li);
 });
-// la parie design de ma page
+
+// la partie design de ma page
+
 
 
 
