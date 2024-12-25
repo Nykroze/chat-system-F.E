@@ -8,6 +8,15 @@
 <body>
     
     <h1>bienvenue sur la page de systeme de chat </h1>
+
+    <ul id="message"></ul>
+    <form id="message-form">
+        
+        <input type="text" name="message-input" id="message-input" placeholder="entrer votre message" required>
+        <button type="submit">envoyer</button>
+        
+    </form>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="script.js"> </script>
 </body>
