@@ -43,11 +43,11 @@ socket.on('message',(data)=>{
     // ici je vais comparer celui qui envoie le message et celui qui le reçois
     if(data.id===socket.id){
         li.textContent=`moi: ${data.text}`;
-        li.className='';  
+        li.className='monMessage';  
     }
     else{
         li.textContent=`autre: ${data.text}`;
-        li.className='';  
+        li.className='autreMessage';  
     }
 
     messageList.appendChild(li);

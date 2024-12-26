@@ -2,3 +2,63 @@
     padding: 0;
     margin: 0;
 }
+
+body{
+    display: flex;
+    flex-direction: column;
+   align-items:center;
+    justify-content: center;
+    background: #032f30;
+    height: 180vh;
+
+}
+form{
+    display: flex;
+    flex-direction: column;
+   align-items:center;
+    justify-content: center;
+    background: #032f30;
+}
+
+
+.autreMessage{
+    
+    border: solid 2px #0c9696;
+    background-color:#0c9696 ;
+    border-radius: 5px;
+    padding: 5px;
+}
+.monMessage{
+   background-color: #0a7075;
+    border: solid 2px #0a7075;
+    border-radius: 5px;
+    padding: 5px;
+
+}
+
+.inputMessage{
+
+    border-radius: 50px;
+    height: 30px;
+    width: 100%;
+    padding: 5px;
+
+}
+
+
+
+
+.btnForm{
+
+    padding: 5px;
+    border-radius:30px;
+    height: 30px;
+
+}
+
+li{
+    text-decoration: none;
+    list-style: none;
+    margin-bottom: 20px;
+}
+
