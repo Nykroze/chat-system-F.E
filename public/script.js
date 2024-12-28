@@ -1,7 +1,10 @@
+
+
 const socket = io(); 
 const messageForm= document.getElementById('message-form');
 const messageInput=document.getElementById('message-input');
 const messageList= document.getElementById('message');
+let userName;
 
  
 socket.on('connect', ()=>{
@@ -18,18 +21,14 @@ socket.on('connect', ()=>{
 
 
 
-// Écoute des messages du serveur
-socket.on('message', (msg) => {
-    console.log('Message reçu du serveur :', msg);
-});
-
 //fonction interactif
 
 messageForm.addEventListener('submit',(e)=>{
      e.preventDefault();
-     const message= messageInput.value;
-     if(message){
-        socket.emit('message', message);
+
+     const messageText=message.value.trim();
+     if(messageText){
+        socket.emit('message', {text:messageText,pseudo:userName});
         messageInput.value='';
      }
 });
@@ -38,22 +37,47 @@ messageForm.addEventListener('submit',(e)=>{
 // recption du message depuis le back-end
 
 socket.on('message',(data)=>{
-   
+    
     const li= document.createElement('li');
-    // ici je vais comparer celui qui envoie le message et celui qui le reçois
-    if(data.id===socket.id){
-        li.textContent=`moi: ${data.text}`;
-        li.className='monMessage';  
-    }
-    else{
-        li.textContent=`autre: ${data.text}`;
-        li.className='autreMessage';  
-    }
-
+    
+        li.textContent=`${data.pseudo} :${data.text}`;
+        li.className=data.pseudo===userName ? 'monMessage':'autreMessage';  
+    
+    
     messageList.appendChild(li);
 });
 
 // la partie design de ma page
+//############################
+
+
+// recuperation des valeurs popup user et mise en place 
+
+const popupUser= document.getElementById('user');
+const nameInput= document.querySelector('.inputPopup');
+const btnUser= document.querySelector('.btnPopup');
+
+btnUser.addEventListener('click',()=>{
+    const name=nameInput.value.trim();
+
+    if(name){
+        userName=name;
+        popupUser.classList.add('remove');
+        console.log(`nom saisi ${userName}`);
+    }
+    else{
+        alert('entre ton nom');
+    }
+})
+
+
+
+
+
+
+
+
+
 
 
 

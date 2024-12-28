@@ -103,13 +103,13 @@ li{
 }
 .userContainer{
     display: flex;
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
     background-color: rgb(0, 0, 0,0.5);;
     border-radius: 20px;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: 15px;
     flex-direction: column;
 
    
@@ -129,4 +129,7 @@ border-radius: 5px;
 padding: 5px;
 height: 30px;
 
+}
+.user.remove{
+    display: none;
 }
