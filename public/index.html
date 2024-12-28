@@ -9,18 +9,21 @@
 </head>
 <body>
     
+    
+    <div class="items ">
 
-
-    <ul id="message"></ul>
-
-
-    <form id="message-form">
-        <input class="inputMessage" type="text" name="message-input" id="message-input" placeholder="entrer votre message" required>
-        <button class="btnForm" type="submit"><img src="./image/send.svg" alt=""></button>
-        
-    </form>
-
+        <ul class="liste" id="message"></ul>
+        <div class="container">
+            
+            
+            <form id="message-form" class="message-form">
+                <input class="inputMessage" type="text" name="message-input" id="message-input" placeholder="entrer votre message" required>
+                <button class="btnForm" type="submit"><img src="./image/send.svg" alt=""></button>
+                
+            </form>
+            
+        </div>
+    </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="script.js"> </script>
 </body>
-</html>
