@@ -76,6 +76,14 @@ socket.on('newUser', (name)=>{
     
 });
 
+//message aurevoir
+socket.on('userLeft', (pseudo)=>{
+    const li = document.createElement('li');
+    li.textContent=`${pseudo} a quitté le chat...`;
+    messageList.appendChild(li);
+
+})
+
 
 
 
