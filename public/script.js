@@ -1,36 +1,33 @@
 
-
 const socket = io(); 
 const messageForm= document.getElementById('message-form');
 const messageInput=document.getElementById('message-input');
 const messageList= document.getElementById('message');
 let userName;
 
- 
+
 socket.on('connect', ()=>{
     console.log('Connecté au serveur via Socket.IO');
-
-
-
-  // Exemple d'envoi de message
-  //  socket.emit('message', 'Hello depuis le frontend !');
-
-
+    // Exemple d'envoi de message
+    //  socket.emit('message', 'Hello depuis le frontend !');
+    
 });
-
 
 
 
 //fonction interactif
 
 messageForm.addEventListener('submit',(e)=>{
-     e.preventDefault();
-
-     const messageText=message.value.trim();
-     if(messageText){
+    e.preventDefault();
+    
+    const messageText=messageInput.value.trim();
+    if(messageText && userName){
         socket.emit('message', {text:messageText,pseudo:userName});
         messageInput.value='';
-     }
+    }
+    else{
+        alert(' entrer votre nom avant d\'envoyez un message ')
+    }
 });
 
 
@@ -40,8 +37,8 @@ socket.on('message',(data)=>{
     
     const li= document.createElement('li');
     
-        li.textContent=`${data.pseudo} :${data.text}`;
-        li.className=data.pseudo===userName ? 'monMessage':'autreMessage';  
+    li.textContent=`${data.pseudo} :${data.text}`;
+    li.className=data.pseudo===userName ? 'monMessage':'autreMessage';  
     
     
     messageList.appendChild(li);
@@ -59,10 +56,11 @@ const btnUser= document.querySelector('.btnPopup');
 
 btnUser.addEventListener('click',()=>{
     const name=nameInput.value.trim();
-
+    
     if(name){
         userName=name;
         popupUser.classList.add('remove');
+        socket.emit('setPseudo', userName)
         console.log(`nom saisi ${userName}`);
     }
     else{
@@ -70,6 +68,13 @@ btnUser.addEventListener('click',()=>{
     }
 })
 
+//message de bienvenue
+socket.on('newUser', (name)=>{
+        const li =document.createElement('li')
+        li.textContent=`${name} a rejonint le chat.`;
+        messageList.appendChild(li);
+    
+});
 
 
 
