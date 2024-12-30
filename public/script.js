@@ -1,3 +1,4 @@
+//appel
 
 const socket = io(); 
 const messageForm= document.getElementById('message-form');
@@ -36,7 +37,6 @@ messageForm.addEventListener('submit',(e)=>{
 socket.on('message',(data)=>{
     
     const li= document.createElement('li');
-    
     li.textContent=`${data.pseudo} :${data.text}`;
     li.className=data.pseudo===userName ? 'monMessage':'autreMessage';  
     
@@ -46,7 +46,6 @@ socket.on('message',(data)=>{
 
 // la partie design de ma page
 //############################
-
 
 // recuperation des valeurs popup user et mise en place 
 
@@ -61,10 +60,10 @@ btnUser.addEventListener('click',()=>{
         userName=name;
         popupUser.classList.add('remove');
         socket.emit('setPseudo', userName)
-        console.log(`nom saisi ${userName}`);
+        console.log(`nom saisi :"${userName}"`);
     }
     else{
-        alert('entre ton nom');
+        alert('veuillez entrer votre  nom');
     }
 })
 
@@ -75,19 +74,40 @@ socket.on('newUser', (name)=>{
         messageList.appendChild(li);
     
 });
-
 //message aurevoir
 socket.on('userLeft', (pseudo)=>{
     const li = document.createElement('li');
     li.textContent=`${pseudo} a quitté le chat...`;
     messageList.appendChild(li);
 
-})
+});
+
+
+
+/*
 
 
 
 
 
+//liste des utilisateur en ligne  a revoir ou a prévoir 
+
+
+socket.on('usersList', (usersList)=>{
+    const userListContainer =document.getElementById('userList');
+    userListContainer.innerHTML='';
+    usersList.forcEach((user)=>{
+        const li =document.createElement('li');
+        li.textContent=user;
+        if(user===currentUser){
+            
+        li.classList.add('current-user');
+    }
+    userListContainer.appendChildl(li);
+});
+});
+
+*/
 
 
 
